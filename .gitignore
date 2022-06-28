@@ -1,0 +1,11 @@
+ocvbot/scripts/cascading_bot/cascade/params.xml
+ocvbot/scripts/cascading_bot/cascade/stage0.xml
+ocvbot/scripts/cascading_bot/cascade/stage1.xml
+ocvbot/scripts/cascading_bot/cascade/stage2.xml
+ocvbot/scripts/cascading_bot/cascade/stage3.xml
+ocvbot/scripts/cascading_bot/cascade/stage4.xml
+ocvbot/scripts/cascading_bot/cascade/stage5.xml
+ocvbot/scripts/cascading_bot/cascade/stage6.xml
+ocvbot/scripts/cascading_bot/cascade/stage7.xml
+ocvbot/scripts/cascading_bot/cascade/stage8.xml
+test.py
