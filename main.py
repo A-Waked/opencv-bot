@@ -1,7 +1,9 @@
 import argparse
 import os
 import importlib
+import cv2 as cv # TODO remove this when done testing
 from ocvbot.botlib.windowcapture import WindowCapture
+from ocvbot.botlib.vision import Vision # TODO remove this when done testing
 
 parser = argparse.ArgumentParser()
 
@@ -15,9 +17,6 @@ parser.add_argument('-b', '--bot', help='start bot', required=False)
 parser.add_argument('-d', '--debug', help='open debug window', required=False, action='store_true')
 
 args = parser.parse_args()
-
-# print args
-# print("Args: {}".format(args))
 
 if args.bot:
     # takes the bot name through the bot argument and runs it from the scripts directory
@@ -40,7 +39,25 @@ elif args.screenshot:
     run(screenshot_path, args.template_match)
 
 else:
-    print("Error: no arguments given")
-    exit()
+    # Testing - Remove later
+    cascade = cv.CascadeClassifier('ocvbot/scripts/cascading_bot/cascade/cascade.xml')
+    vision = Vision()
+    
+    while True:
+        capture = WindowCapture("").get_screenshot()[1]
+        rectangles = cascade.detectMultiScale(capture)
+        vision.draw_rectangles(capture, rectangles)
+        cv.imshow('output', capture)
+
+        key = cv.waitKey(1)
+        if key == ord('q'):
+            cv.destroyAllWindows()
+            break
+
+
+    #----------------------------------------
+
+    # print("Error: no arguments given")
+    # exit()
 
 

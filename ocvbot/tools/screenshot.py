@@ -242,12 +242,14 @@ def start_training(path):
         if not os.path.exists(path+"cascade"):
             os.makedirs(path+"cascade")
         
+        # open new commandline and run opencv_traincascade.exe
+        # TODO allow user to input configs (numPos, numNeg, stageCount, ...)
+        cascade_command = " ".join([tools_path + "opencv_traincascade.exe", "-data", "cascade/", "-vec", "positive_samples.vec", "-bg","negative_paths.txt", "-numPos", str(int(box_count * 0.8)), "-numNeg", str(int(box_count * 0.8 * 2)), "-numStages", "20", "-w", "24", "-h", "24"])
+        os.system("cd " + path + " & start cmd /k" + cascade_command + " & pause")
+        input('Enter to exit from tool...')
 
-        print(tools_path + "opencv_traincascade.exe" + " -data " + "\""+path+"cascade/"+"\"" + " -vec " + "\""+path+"positive_samples.vec"+"\""+ " -bg "+ "\""+path+"negative_paths.txt"+"\""+ " -numPos "+ str(int(box_count * 0.8))+ " -numNeg "+ str(int(box_count * 0.8 * 2))+ " -numStages "+ "10"+ " -w "+ "24"+ " -h ", "24")
-
-        # add " as arguments dont handle spaces the same way as the other applications
-        # Only works when called from script directory for some reason. Hardcoding the full path doesn't work
-        subprocess.call([tools_path + "opencv_traincascade.exe", "-data", "cascade/", "-vec", "positive_samples.vec", "-bg","negative_paths.txt", "-numPos", str(int(box_count * 0.8)), "-numNeg", str(int(box_count * 0.8 * 2)), "-numStages", "10", "-w", "24", "-h", "24"], cwd=path)
+        # call in terminal
+        # subprocess.call([tools_path + "opencv_traincascade.exe", "-data", "cascade/", "-vec", "positive_samples.vec", "-bg","negative_paths.txt", "-numPos", str(int(box_count * 0.8)), "-numNeg", str(int(box_count * 0.8 * 2)), "-numStages", "16", "-w", "24", "-h", "24"], cwd=path)
 
     else:
         print("opencv tools path does not exist in the specified path: " + tools_path)
